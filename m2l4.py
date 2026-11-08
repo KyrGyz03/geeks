@@ -1,13 +1,20 @@
 from abc import ABC, abstractmethod
 
 
-class Notifications(ABC):
-	"""Абстрактный базовый класс для разных способов отправки уведомлений."""
+class Notifications():
+    def __init__(self, name):
+         self.name = name
 
-	@abstractmethod
-	def send(self, message: str) -> None:
-		"""Отправляет уведомление."""
-		pass
+    def sendNot(self,type, message):
+        if type == "Telegram":
+            print(f"Отправка Telegram-уведомления: {message}")
+        elif type == "Email":
+              print(f"Отправка Email-уведомления: {message}")
+        elif type == "SMS":
+              print(f"Отправка SMS-уведомления: {message}")
+        elif type == "VK":
+              print(f"Отправка VK-уведомления: {message}")
+
 class EmailNots(Notifications):
 	def send(self, message: str) -> None:
 		print(f"Отправка email-уведомления: {message}")
