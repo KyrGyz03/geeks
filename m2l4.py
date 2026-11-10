@@ -1,19 +1,20 @@
 from abc import ABC, abstractmethod
 
 
-class Notifications():
-    def __init__(self, name):
-         self.name = name
+class Notifications(ABC):
+    @abstractmethod
+    def send(self, message: str) -> None:
+        pass
 
-    def sendNot(self,type, message):
-        if type == "Telegram":
-            print(f"Отправка Telegram-уведомления: {message}")
-        elif type == "Email":
-              print(f"Отправка Email-уведомления: {message}")
-        elif type == "SMS":
-              print(f"Отправка SMS-уведомления: {message}")
-        elif type == "VK":
-              print(f"Отправка VK-уведомления: {message}")
+    # def sendNot(self,type, message):
+    #     if type == "Telegram":
+    #         print(f"Отправка Telegram-уведомления: {message}")
+    #     elif type == "Email":
+    #           print(f"Отправка Email-уведомления: {message}")
+    #     elif type == "SMS":
+    #           print(f"Отправка SMS-уведомления: {message}")
+    #     elif type == "VK":
+    #           print(f"Отправка VK-уведомления: {message}")
 
 class EmailNots(Notifications):
 	def send(self, message: str) -> None:
@@ -28,8 +29,8 @@ class TelegramNots(Notifications):
         print(f"Отправка сообщения в Telegram: {message}")
 
 class vkNots(Notifications):
-     def send(self, message):
-          return super().send(message)
+    def send(self, message: str) -> None:
+        print(f"Отправка VK-уведомления: {message}")
 
 # Функция-клиент. Она знает только про абстрактный класс Notifications
 def notify_user(notification_service: Notifications, text: str):
